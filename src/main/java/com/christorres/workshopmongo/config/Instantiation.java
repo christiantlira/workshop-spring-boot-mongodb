@@ -32,17 +32,20 @@ public class Instantiation implements CommandLineRunner {
 		userRepository.deleteAll();
 		postRepository.deleteAll();
 		
-		User maria = new User(null, "Gilozinho Delash", "gilozinho@gmail.com");
+		User gilo = new User(null, "Gilozinho Delash", "gilozinho@gmail.com");
 		User alex = new User(null, "Alex Ryco", "alex@gmail.com");
 		User bob = new User(null, "Bob Tabor", "bob@gmail.com");
 		
-		userRepository.saveAll(Arrays.asList(maria, alex, bob));
+		userRepository.saveAll(Arrays.asList(gilo, alex, bob));
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
-		Post post2 = new Post(null, sdf.parse("23/03/2023"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+		Post post1 = new Post(null, sdf.parse("21/03/2023"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(gilo));
+		Post post2 = new Post(null, sdf.parse("23/03/2023"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(gilo));
 		
 		
 		postRepository.saveAll(Arrays.asList(post1, post2));
+		
+		gilo.getPosts().addAll(Arrays.asList(post1, post2));
+		userRepository.save(gilo);
 	}
 
 }
